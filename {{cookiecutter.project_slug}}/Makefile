@@ -22,8 +22,10 @@ help:
 dev:
 	@echo "\nCreating Development Environment\n"
 	poetry install
-	pre-commit install
-	pre-commit autoupdate
+	poetry run pre-commit install
+	poetry run pre-commit autoupdate
+	@echo "\nDon't forget to activate your virtual environment!"
+	@echo "run: source .venv/bin/activate"
 
 build:
 	@echo "\nBuilding: {{cookiecutter.project_slug}}\n"
