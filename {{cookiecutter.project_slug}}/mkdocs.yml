@@ -1,0 +1,48 @@
+site_name: {{cookiecutter.project_name}}
+repo_url: {{cookiecutter.project_github_url}}
+site_url: https://{{cookiecutter.author_github_username}}.github.io/{{cookiecutter.project_slug}}/
+site_description: {{cookiecutter.project_short_description}}
+site_author: {{cookiecutter.author_name}}
+use_directory_urls: false
+strict: true
+nav:
+  - Home:
+      - Index: index.md
+  - Changelog: changelog.md
+  - Contributing: contributing.md
+plugins:
+  - mkdocstrings:
+      watch:
+        - {{cookiecutter.project_slug}}
+  - search
+theme:
+  name: material
+  font:
+    text: Roboto
+    code: SF Mono
+  feature:
+    tabs: true
+  palette:
+    primary: indigo
+    accent: blue
+markdown_extensions:
+  - codehilite
+  - markdown_include.include:
+      base_path: docs
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.inlinehilite
+  - admonition
+  - extra
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_div_format
+  - pymdownx.details
+  - pymdownx.tabbed
+  - toc:
+      permalink: true

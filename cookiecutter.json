@@ -1,0 +1,17 @@
+{
+    "project_name": "Full name of your project",
+    "project_slug": "{{cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_')}}",
+    "project_short_description": "A short description of your project",
+    "open_source_license": [
+        "MIT License",
+        "BSD License",
+        "ISC License",
+        "Apache Software License 2.0",
+        "GNU General Public License v3"
+    ],
+    "author_github_username": "YourUserName",
+    "project_github_url": "https://github.com/{{cookiecutter.author_github_username}}/{{cookiecutter.project_slug}}",
+    "author_name": "Your Name",
+    "author_email": "yourname@example.com",
+    "use_gh_cli_to_create_repo": "y"
+}

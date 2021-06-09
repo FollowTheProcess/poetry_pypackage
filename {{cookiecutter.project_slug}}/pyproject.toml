@@ -1,0 +1,57 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "{{cookiecutter.project_slug}}"
+version = "0.1.0"
+description = "{{cookiecutter.project_short_description}}"
+authors = ["{{cookiecutter.author_name}} <{{cookiecutter.author_email}}>"]
+license = "{{cookiecutter.open_source_license}}"
+homepage = "{{cookiecutter.project_github_url}}"
+readme = "README.md"
+repository = "{{cookiecutter.project_github_url}}"
+documentation = "https://{{cookiecutter.author_github_username}}.github.io/{{cookiecutter.project_slug}}/"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Natural Language :: English",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Typing :: Typed"
+]
+
+[tool.poetry.urls]
+Documentation = "https://{{cookiecutter.author_github_username}}.github.io/{{cookiecutter.project_slug}}/"
+Source = "{{cookiecutter.project_github_url}}"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.4"
+bump2version = "^1.0.1"
+pre-commit = "^2.13.0"
+flake8 = "^3.9.2"
+isort = "^5.8.0"
+nox = "^2021.6.6"
+black = "^21.5b2"
+pytest-cov = "^2.12.1"
+coverage-badge = "^1.0.1"
+coverage = "^5.3"
+toml = "^0.10.2"
+mypy = "^0.812"
+mkdocs = "^1.2"
+mkdocs-material = "^7.1.7"
+mkdocstrings = "^0.15.1"
+markdown-include = "^0.6.0"
+livereload = "^2.6.3"
+
+[tool.isort]
+# Added for compatability with black
+profile = "black"
+multi_line_output = 3
+
+[tool.coverage.run]
+omit = [""]
