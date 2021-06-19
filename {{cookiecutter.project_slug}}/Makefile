@@ -33,25 +33,25 @@ build:
 
 test:
 	@echo "\nRunning: pytest\n"
-	pytest --cov={{cookiecutter.project_slug}} tests/
+	poetry run pytest --cov={{cookiecutter.project_slug}} tests/
 
 cov: test
 	@echo "\nRunning: coverage\n"
-	coverage report --show-missing
-	coverage-badge -fo ./docs/img/coverage.svg
+	poetry run coverage report --show-missing
+	poetry run coverage-badge -fo ./docs/img/coverage.svg
 
 style:
 	@echo "\nRunning: isort"
-	isort .
+	poetry run isort .
 	@echo "\nRunning: black"
-	black .
+	poetry run black .
 	@echo "\nRunning: flake8"
-	flake8 .
+	poetry run flake8 .
 	@echo "\nRunning: mypy"
-	mypy .
+	poetry run mypy .
 
 check: cov style
-	pre-commit run --all-files
+	poetry run pre-commit run --all-files
 
 clean:
 	@echo "\nCleaning project clutter\n"
@@ -60,10 +60,10 @@ clean:
 
 docs:
 	@echo "\nBuilding Docs\n"
-	mkdocs build --clean
+	poetry run mkdocs build --clean
 
 autodocs:
 	@echo "\nServing Docs\n"
-	mkdocs serve
+	poetry run mkdocs serve
 
 all: check docs
