@@ -27,7 +27,7 @@ Documentation = "https://{{cookiecutter.author_github_username}}.github.io/{{coo
 Source = "{{cookiecutter.project_github_url}}"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.7"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"
