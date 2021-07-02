@@ -9,7 +9,6 @@ from typing import Any, Dict, List
 
 import nox
 
-
 # Minimum nox version
 nox.needs_version = ">=2021.6.6"
 
@@ -166,7 +165,7 @@ def lint(session: nox.Session) -> None:
         session.run("black", ".")
 
     session.run("flake8", ".")
-    session.run("mypy", ".")
+    session.run("mypy")
 
 
 @nox.session(python=DEFAULT_PYTHON)
