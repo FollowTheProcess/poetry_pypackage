@@ -207,3 +207,4 @@ If you add pages to the docs, make sure they are placed in the nav tree in the `
 [mkdocs-material]: https://squidfunk.github.io/mkdocs-material/
 [doit]: https://pydoit.org.
 [pipx]: https://pypa.github.io/pipx/installation/
+[poetry]: https://python-poetry.org
