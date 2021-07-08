@@ -99,7 +99,7 @@ pipx install cookiecutter
 * Call cookiecutter with this template and answer all the questions
 
 ``` shell
-cookiecutter https://github.com/FollowTheProcess/cookie_pypackage.git
+cookiecutter https://github.com/FollowTheProcess/poetry_pypackage.git
 ```
 
 ### Dev Setup
