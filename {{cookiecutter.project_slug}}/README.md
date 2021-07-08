@@ -21,4 +21,7 @@
 
 ### Credits
 
-This package was created with [cookiecutter](https://github.com/cookiecutter/cookiecutter) and the `FollowTheProcess/poetry_pypackage` project template.
+This package was created with [cookiecutter] and the [FollowTheProcess/poetry_pypackage] project template.
+
+[cookiecutter]: https://github.com/cookiecutter/cookiecutter
+[FollowTheProcess/poetry_pypackage]: https://github.com/FollowTheProcess/poetry_pypackage

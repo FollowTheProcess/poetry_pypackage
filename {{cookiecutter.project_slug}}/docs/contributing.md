@@ -74,49 +74,37 @@ This will (in order):
 
 ### Step 3: Create the Environment
 
-Before you do anything, you'll want to set up your virtual environment...
+Before you do anything, you'll want to set up your development environment...
 
-{{cookiecutter.project_name}} uses [poetry] to manage development, so to work on it you'll need to get it too! Once you've installed it, come back and follow the below steps.
+{{cookiecutter.project_slug}} uses [poetry] to manage development and [nox] for automation superpowers. So to work on it you'll need to get both of those tools too!
 
-The good news is we use [doit] to automate the crap out of the setup.
+I recommend using [pipx] for python command line tools like these, it installs each tool in it's own isolated environment but exposes the command to your terminal as if you installed it globally.
 
-All you need to do is install doit (We recommend [pipx] to keep it isolated) and then run...
+We've automated the crap out of the development process for {{cookiecutter.project_slug}}, to get started all you need to do is run:
 
 ```shell
-doit
+nox
 ```
 
 !!! note
 
-    If you've never used doit before, go check it out. It's great!
+    If you've never used nox before, go check it out. It's great!
 
-    It is effectively a pythonic makefile that knows what has or hasn't been done yet, if you run doit twice in succession, it won't do anything the second time because it knows it's just done everything, very clever!
+    It's an amazing project automation toolkit, you can do just about anything with it but it's especially good at things like this!
 
-When you run this, doit will:
+When you run this, nox will:
 
 * Create a fresh python virtual environment in the project for you (.venv)
-* Install {{cookiecutter.project_name}} for you along with all of it's development dependencies
+* Install {{cookiecutter.project_slug}} for you along with all of it's development dependencies
 * Make sure VSCode is set up to use this environment (if you use it)
-* Run the unit tests
-* Run all linting, type checking and formatting
-* Perform test coverage analysis
-* Build the docs
 
-Not bad for a single command! Doing it this way means that before you start working on {{cookiecutter.project_name}} you know its all been installed and works correctly.
+Not bad for a single command! Doing it this way means that before you start working on {{cookiecutter.project_slug}} you know its all been installed and works correctly.
 
-Wait for it to do it's thing and then simply activate the environment normally if you want
+Wait for it to do it's thing and then you can get started.
 
-=== "macOS & Linux"
+!!! note
 
-    ```shell
-    source .venv/bin/activate
-    ```
-
-=== "Windows"
-
-    ```shell
-    .\.venv.\Scripts.\Activate.ps1
-    ```
+    The next time you run `nox`, it won't do this step again. It will run all the project tests, lint and format the source code, analyse test coverage and build the docs :robot:
 
 ### Step 4: Do your thing
 
