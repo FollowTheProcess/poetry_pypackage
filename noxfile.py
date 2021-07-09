@@ -19,11 +19,8 @@ ON_CI = bool(os.getenv("CI"))
 
 # Global project stuff
 PROJECT_ROOT = Path(__file__).parent.resolve()
-PROJECT_SRC = PROJECT_ROOT / "{{cookiecutter.project_slug}}"
+PROJECT_SRC = PROJECT_ROOT / "poetry_pypackage"
 PROJECT_TESTS = PROJECT_ROOT / "tests"
-
-# Where to save the coverage badge
-COVERAGE_BADGE = PROJECT_ROOT / "docs" / "img" / "coverage.svg"
 
 # VSCode
 VSCODE_DIR = PROJECT_ROOT / ".vscode"
@@ -36,7 +33,7 @@ PYTHON = os.fsdecode(VENV_DIR / "bin" / "python")
 # Python to use for non-test sessions
 DEFAULT_PYTHON: str = "3.9"
 
-# All supported python versions for {{cookiecutter.project_slug}}
+# All supported python versions for poetry_pypackage
 PYTHON_VERSIONS: List[str] = [
     "3.7",
     "3.8",
@@ -60,37 +57,17 @@ SEEDS: List[str] = [
 SESSION_REQUIREMENTS: Dict[str, List[str]] = {
     "test": [
         "pytest",
-        "pytest-cov",
-        "coverage",
-        "toml",
-    ],
-    "lint": [
-        "flake8",
-        "isort",
-        "black",
-        "mypy",
-    ],
-    "docs": [
-        "mkdocs",
-        "mkdocs-material",
-        "mkdocstrings",
-        "markdown-include",
-        "livereload",
-    ],
-    "coverage": [
-        "coverage",
-        "coverage-badge",
-        "toml",
+        "pytest-cookies",
     ],
 }
 
 # "dev" should only be run if no virtual environment found and we're not on CI
 # i.e. someone is using nox to set up their local dev environment
-# to work on {{cookiecutter.project_slug}}
+# to work on poetry_pypackage
 if not VENV_DIR.exists() and not ON_CI:
     nox.options.sessions = ["dev"]
 else:
-    nox.options.sessions = ["test", "coverage", "lint", "docs"]
+    nox.options.sessions = ["test"]
 
 
 def poetry_install(session: nox.Session, *args: str, **kwargs: Any) -> None:
@@ -261,91 +238,4 @@ def test(session: nox.Session) -> None:
     session.run("poetry", "install", "--no-dev", external=True, silent=True)
     poetry_install(session, *requirements)
 
-    session.run("pytest", f"--cov={PROJECT_SRC}", f"{PROJECT_TESTS}/")
-    # Notify queues up 'coverage' to run next
-    # so 'nox -s test' will run coverage afterwards
-    session.notify("coverage")
-
-
-@nox.session(python=DEFAULT_PYTHON)
-def coverage(session: nox.Session) -> None:
-    """
-    Test coverage analysis.
-    """
-
-    # Error out if user does not have poetry installed
-    session_requires(session, "poetry")
-
-    requirements = get_session_requirements(session)
-
-    if not COVERAGE_BADGE.exists():
-        COVERAGE_BADGE.parent.mkdir(parents=True)
-        COVERAGE_BADGE.touch()
-
-    update_seeds(session)
-    poetry_install(session, *requirements)
-
-    session.run("coverage", "report", "--show-missing")
-    session.run("coverage-badge", "-fo", f"{COVERAGE_BADGE}")
-
-
-@nox.session(python=DEFAULT_PYTHON)
-def lint(session: nox.Session) -> None:
-    """
-    Formats project with black and isort, then runs flake8 and mypy linting.
-    """
-
-    # Error out if user does not have poetry installed
-    session_requires(session, "poetry")
-
-    requirements = get_session_requirements(session)
-
-    update_seeds(session)
-    poetry_install(session, *requirements)
-
-    # If we're on CI, run in check mode so build fails if formatting isn't correct
-    if ON_CI:
-        session.run("isort", ".", "--check")
-        session.run("black", ".", "--check")
-    else:
-        # If local, go ahead and fix formatting
-        session.run("isort", ".")
-        session.run("black", ".")
-
-    session.run("flake8", ".")
-    session.run("mypy")
-
-
-@nox.session(python=DEFAULT_PYTHON)
-def docs(session: nox.Session) -> None:
-    """
-    Builds the project documentation. Use '-- serve' to see changes live.
-    """
-
-    # Error out if user does not have poetry installed
-    session_requires(session, "poetry")
-
-    requirements = get_session_requirements(session)
-
-    update_seeds(session)
-    poetry_install(session, *requirements)
-
-    if "serve" in session.posargs:
-        session.run("mkdocs", "serve")
-    else:
-        session.run("mkdocs", "build", "--clean")
-
-
-@nox.session(python=DEFAULT_PYTHON)
-def build(session: nox.Session) -> None:
-    """
-    Builds the package sdist and wheel.
-    """
-
-    # Error out if user does not have poetry installed
-    session_requires(session, "poetry")
-
-    update_seeds(session)
-    session.run("poetry", "install", "--no-dev", external=True, silent=True)
-
-    session.run("poetry", "build", external=True)
+    session.run("pytest", f"{PROJECT_TESTS}/")

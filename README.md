@@ -1,6 +1,8 @@
 # Poetry Pypackage
 
 ![License](https://img.shields.io/github/license/FollowTheProcess/poetry_pypackage.svg)
+[![GitHub](https://img.shields.io/github/v/release/FollowTheProcess/poetry_pypackage?logo=github&sort=semver)](https://github.com/FollowTheProcess/poetry_pypackage)
+[![CI](https://github.com/FollowTheProcess/poetry_pypackage/workflows/CI/badge.svg)](https://github.com/FollowTheProcess/poetry_pypackage/actions?query=workflow%3ACI)
 
 A modern python package template, inspired by the [original] but with some updates bringing it to the forefront of modern python!
 
@@ -79,6 +81,16 @@ PEP 517 & 518 (think `pyproject.toml`) are on their way to becoming the default.
 poetry install                             # Installs your project and its dependencies
 ```
 
+### GitHub Issue Labelling
+
+Series of helpful labels that you can use to categorise issues and pull requests. These come in especially handy when combined with the Release Drafter workflow!
+
+### Automatic Release Drafts
+
+Automatically generate release notes with the [Release Drafter] workflow. This uses the labels from issues and pull requests to draft pretty and detailed release notes for your GitHub releases.
+
+This is automatically run when you push a new tag to main.
+
 ## Usage
 
 * Ensure you have cookiecutter installed:
@@ -99,16 +111,12 @@ pipx install cookiecutter
 * Call cookiecutter with this template and answer all the questions
 
 ``` shell
-cookiecutter https://github.com/FollowTheProcess/poetry_pypackage.git
+cookiecutter https://github.com/FollowTheProcess/poetry_pypackage.git --checkout v0.1.0
 ```
 
-### Dev Setup
-
-#### Manual
-
-You can do the whole setup manually if you like
-
 * Create a virtual environment, a git repo (if not using the gh cli) and start developing
+
+Either do this yourself:
 
 ``` shell
 cd <name_of_your_project>
@@ -116,12 +124,10 @@ cd <name_of_your_project>
 poetry install
 ```
 
-#### Makefile
-
-Or there is a handy makefile that will run this for you! All you'll need to do is:
+Or just let [nox] do it!
 
 ``` shell
-make dev
+nox
 ```
 
 * Make a first commit to set up the github repo (if you didn't use the gh cli)

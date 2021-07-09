@@ -1,0 +1,57 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        python-version: [3.7, 3.8, 3.9]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install Dependencies
+        run: |
+          python3 -m pip install --upgrade pip setuptools wheel
+          python3 -m pip install poetry
+          python3 -m pip install nox
+
+      - name: Run Tests
+        run: nox --non-interactive --session "test-${{ matrix.python-version }}"
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+
+    needs: [test]
+
+    # Only release on new tag
+    if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        with:
+          draft: false
+          prerelease: false
+
+      - name: Publish Release Notes
+        uses: release-drafter/release-drafter@v5.15.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
