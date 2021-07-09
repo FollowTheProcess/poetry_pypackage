@@ -152,8 +152,6 @@ jobs:
           GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
           GITHUB_REPOSITORY: {% raw %}${{ github.repository }}{% endraw %}
         with:
-          tag_name: {% raw %}${{ github.ref }}{% endraw %}
-          name: {% raw %}${{ github.ref }}{% endraw %}
           draft: false
           prerelease: false
           files: |
