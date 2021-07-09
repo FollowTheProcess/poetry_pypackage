@@ -112,7 +112,7 @@ pipx install cookiecutter
 * Call cookiecutter with this template and answer all the questions
 
 ``` shell
-cookiecutter https://github.com/FollowTheProcess/poetry_pypackage.git --checkout v0.1.0
+cookiecutter https://github.com/FollowTheProcess/poetry_pypackage.git --checkoit v0.2.0
 ```
 
 * Create a virtual environment, a git repo (if not using the gh cli) and start developing
