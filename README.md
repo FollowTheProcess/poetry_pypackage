@@ -78,7 +78,8 @@ Option to use the new GitHub CLI to create a GitHub repo for you during project 
 PEP 517 & 518 (think `pyproject.toml`) are on their way to becoming the default. No more `requirements.txt` `requirements_dev.txt` `requirements_docs.txt`. We use [poetry] for this now so all you need to do now is:
 
 ``` shell
-poetry install                             # Installs your project and its dependencies
+# Installs your project and its dependencies
+poetry install
 ```
 
 ### GitHub Issue Labelling
