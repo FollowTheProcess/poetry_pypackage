@@ -1,0 +1,48 @@
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "poetry_pypackage"
+version = "0.1.0"
+description = "A modern python package template."
+authors = ["Tom Fleet <tomfleet2018@gmail.com>"]
+license = "MIT License"
+homepage = "https://github.com/FollowTheProcess/poetry_pypackage"
+readme = "README.md"
+repository = "https://github.com/FollowTheProcess/poetry_pypackage"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+cookiecutter = "^1.7.3"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.4"
+pytest-cookies = "^0.6.1"
+bump2version = "^1.0.1"
+flake8 = "^3.9.2"
+isort = "^5.8.0"
+nox = ">=2021.6.6"
+black = ">=21.5b2"
+toml = "^0.10.2"
+mypy = ">=0.901"
+
+[tool.isort]
+# Added for compatability with black
+profile = "black"
+multi_line_output = 3
+
+[tool.mypy]
+files = [
+    "poetry_pypackage/**/*.py",
+    "noxfile.py",
+]
+
+ignore_missing_imports = true
+strict = true
+disallow_untyped_decorators = false
+pretty = true
+
+[[tool.mypy.overrides]]
+module = "tests.*"
+ignore_errors = true
