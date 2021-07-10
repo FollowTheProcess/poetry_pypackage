@@ -154,8 +154,3 @@ jobs:
           prerelease: false
           files: |
             dist/*
-
-      - name: Publish Release Notes
-        uses: release-drafter/release-drafter@v5.15.0
-        env:
-          GITHUB_TOKEN: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
