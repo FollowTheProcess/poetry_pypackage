@@ -1,5 +1,5 @@
 """
-Tests for cookie_pypackage.
+Tests for poetry_pypackage.
 
 Author: Tom Fleet
 Created: 09/07/2021
