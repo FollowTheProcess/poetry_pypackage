@@ -155,6 +155,7 @@ def set_up_vscode(session: nox.Session) -> None:
         settings = {
             "python.defaultInterpreterPath": PYTHON,
             "python.testing.pytestEnabled": True,
+            "python.testing.pytestArgs": ["tests"],
         }
 
         with open(SETTINGS_JSON, mode="w", encoding="utf-8") as f:
