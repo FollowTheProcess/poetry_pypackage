@@ -12,8 +12,9 @@ from typing import Any, Dict, List, Set
 
 import nox
 
-# Minimum nox version
+# Nox config
 nox.needs_version = ">=2021.6.6"
+nox.options.error_on_external_run = True
 
 # GitHub Actions
 ON_CI = bool(os.getenv("CI"))
@@ -131,7 +132,7 @@ def set_up_vscode(session: nox.Session) -> None:
         settings = {
             "python.defaultInterpreterPath": PYTHON,
             "python.testing.pytestEnabled": True,
-            "python.testing.pytestArgs": ["tests"],
+            "python.testing.pytestArgs": [PROJECT_TESTS.name],
         }
 
         with open(SETTINGS_JSON, mode="w", encoding="utf-8") as f:
@@ -297,7 +298,7 @@ def test(session: nox.Session) -> None:
     session.run("poetry", "install", "--no-dev", external=True, silent=True)
     poetry_install(session, *requirements)
 
-    session.run("pytest", f"{PROJECT_TESTS}/")
+    session.run("pytest", f"{PROJECT_TESTS}")
 
 
 @nox.session(python=DEFAULT_PYTHON)
